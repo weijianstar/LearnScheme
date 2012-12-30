@@ -115,5 +115,20 @@
 
 (define (f-to-c fahrenheit)
   (/ (- fahrenheit 32) 1.8))
+
+
+;exerise 147
+(define-struct phone (area switch four))
+
+(define (replace list-of-phones)
+  (cond
+    [(empty? list-of-phones) empty]
+    [(= 713 (phone-area (first list-of-phones))) (cons (make-phone 281 (phone-switch (first list-of-phones)) (phone-four (first list-of-phones))) (replace (rest list-of-phones)))]
+    [else (cons (make-phone (phone-area (first list-of-phones)) (phone-switch (first list-of-phones)) (phone-four (first list-of-phones))) (replace (rest list-of-phones)))]))
+
+
+  
+
+
   
     
