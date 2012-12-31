@@ -55,13 +55,13 @@
     [(empty? (rest anelot)) (first anelot)]
     [(cons? (rest anelot)) (+ (first anelot) (sum-anelot (rest anelot)))]))
 
-;exerise 128
+;exercise 128
 (define (add-to-pi n)
   (cond
     [(zero? n) pi]
     [(positive? n) (add1 (add-to-pi (sub1 n)))]))
 
-;exerise 129
+;exercise 129
 (define (add value x)
   (+ value x))
 
@@ -70,7 +70,7 @@
     [(zero? n) 0]
     [(= 1 n) x]
     [(positive? n) (add(multiply (sub1 n) x) x)]))
-;exerise 132
+;exercise 132
 (define-struct layer (color doll))
 
 ; RD -> Number
@@ -86,7 +86,7 @@
     [(string? an-rd) an-rd]
     [(layer? an-rd) (string-append (colors (layer-doll an-rd)) "," (layer-color an-rd))]))
 
-;exerise 133
+;exercise 133
 (define (inner an-rd)
   (cond
     [(string? an-rd) an-rd]
@@ -107,7 +107,7 @@
 (define (wage h)
   (* 14 h))
 
-;exerise 140
+;exercise 140
 (define (convertFC fahrenheit)
   (cond
     [(empty? fahrenheit) empty]
@@ -117,7 +117,7 @@
   (/ (- fahrenheit 32) 1.8))
 
 
-;exerise 147
+;exercise 147
 (define-struct phone (area switch four))
 
 (define (replace list-of-phones)
@@ -127,8 +127,47 @@
     [else (cons (make-phone (phone-area (first list-of-phones)) (phone-switch (first list-of-phones)) (phone-four (first list-of-phones))) (replace (rest list-of-phones)))]))
 
 
-  
+;exercise 149
+(define (convert-lines-to-string lines)
+  (cond
+    [(empty? lines) empty]
+    [(empty? (rest lines)) (first lines)]
+    [(cons? lines) (string-append (first lines) "\n" (convert-lines-to-string (rest lines)))]))
+
+;exercise 164
+(define-struct gp (name score))
+
+(define (sort players)
+  (cond
+    [(empty? players) empty]
+    [(cons? players) (insert (first players) (sort (rest players)))]))
+
+(define (insert player players)
+  (cond
+    [(empty? players) (cons player empty)]
+    [else (if (>= (gp-score player) (gp-score (first players)))
+          (cons player players)
+          (cons (first players) (insert player (rest players))))]))
+          
+;exercise165
+(define (insertv2 n alon)
+  (cond
+    [(empty? alon) (cons n empty)]
+    [else (if (>= n (first alon))
+              (cons n alon)
+              (cons (first alon) (insertv2 n (rest alon))))]))
+(define (sort-> alon)
+  (cond
+    [(empty? alon) empty]
+    [(cons? alon) (insertv2 (first alon) (sort-> (rest alon)))]))
 
 
-  
-    
+(define (search-sort n alon)
+  (cond
+    [(empty? alon) false]
+    [else (or (= (first alon) n) (search n (rest alon)))]))
+
+(define (search n alon)
+  (search-sort n (sort-> alon)))
+
+                                         
